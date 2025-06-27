@@ -1344,3 +1344,28 @@ pre .javascript .function {
   margin-right: 5px;
   display: inline-block;
 }
+body {
+  background-image: url("/images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+/* ---------------------------------- */
+/* --- 您新增的自定义样式从这里开始 --- */
+/* ---------------------------------- */
+/* 任务一：让主内容区和侧边栏背景透明 */
+/* #main 是文章内容区, #sidebar 是右侧边栏 */
+/* 任务二：给顶部的 Header 区域设置独立的横幅图片 */
+}
+body #main,
+body #sidebar {
+/* 方案 A: 完全透明 */
+/* background: transparent; */
+/* 方案 B: 半透明磨砂玻璃效果 (更推荐, 保证文章可读性) */
+  background: rgba(255,255,255,0.85); /* 最后一个值0.85是透明度, 可在0到1之间调整 */
+}
+body #header {
+/* 将 'banner.jpg' 替换成你自己的图片文件名 */
+  background-image: url("/images/banner.jpg");
+  background-repeat: no-repeat;
+}
