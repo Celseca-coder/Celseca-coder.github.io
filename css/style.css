@@ -1350,12 +1350,14 @@ body {
 }
 #header {
   background: #fff url("/images/banner.jpg") no-repeat center/contain;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .outer {
-  background: none !important;
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
-  border: none !important;
+  background: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
 }
 .article-entry,
 .widget {
