@@ -1350,22 +1350,28 @@ body {
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-/* ---------------------------------- */
-/* --- 您新增的自定义样式从这里开始 --- */
-/* ---------------------------------- */
-/* 任务一：让主内容区和侧边栏背景透明 */
-/* #main 是文章内容区, #sidebar 是右侧边栏 */
-/* 任务二：给顶部的 Header 区域设置独立的横幅图片 */
 }
-body #main,
-body #sidebar {
-/* 方案 A: 完全透明 */
-/* background: transparent; */
-/* 方案 B: 半透明磨砂玻璃效果 (更推荐, 保证文章可读性) */
-  background: rgba(255,255,255,0.85); /* 最后一个值0.85是透明度, 可在0到1之间调整 */
-}
-body #header {
-/* 将 'banner.jpg' 替换成你自己的图片文件名 */
+/* 2. 顶部横幅 (Header) */
+#header {
   background-image: url("/images/banner.jpg");
+  background-size: contain;
+  background-position: center;
   background-repeat: no-repeat;
+}
+/* 3. 让外层主容器和侧边栏完全透明 */
+/* 这一步是为了确保我们只控制内层元素的背景 */
+#main,
+#sidebar {
+  background: transparent !important;
+  border: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+/* 4. 【新增】让文章正文和代码块的背景半透明 */
+.article-entry {
+/* 这里我们使用深色半透明背景，与您的主题风格保持一致 */
+  background: rgba(255,255,255,0.85) !important;
+/* 以下为可选的美化样式 */
+  padding: 20px; /* 给内容增加一点内边距，让它不那么贴边 */
+  border-radius: 8px; /* 给它一个圆角，更好看 */
 }
