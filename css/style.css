@@ -1345,7 +1345,7 @@ pre .javascript .function {
   display: inline-block;
 }
 body {
-  background-image: #fff url("/images/background.jpg");
+  background-image: url("/images/background.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1353,10 +1353,7 @@ body {
 }
 /* 2. 顶部横幅 (Header) */
 #header {
-  background-image: url("/images/banner.jpg");
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: #fff url("/images/banner.jpg") no-repeat center/contain;
 }
 /* 3. 让外层主容器和侧边栏完全透明 */
 /* 这一步是为了确保我们只控制内层元素的背景 */
