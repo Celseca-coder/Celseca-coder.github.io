@@ -6,15 +6,15 @@
   
   <title>mafTools的工具的安装及Makefile修复 | Celseca&#39;s Diary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="written by : Celseca 众所周知，mafTools是一款很好用的生物信息学工具。 但因其年代久远，版本老旧，语法过时等问题给使用者带来诸多不便。小编通过修改mafTools及其依赖的Makefile,终于成功安装该工具。 以下书写相应教程，按照安装的顺序结构记叙。唯防止后来人弯弯绕绕耳！   需要的目录总览123456789101112131415161718maftools_p">
+  <meta name="description" content="written by : Celseca 众所周知，mafTools是一款很好用的生物信息学工具。 但因其年代久远，版本老旧，语法过时等问题给使用者带来诸多不便。小编通过修改mafTools及其依赖的Makefile,终于成功安装该工具。 以下书写相应教程，按照安装的顺序结构记叙。唯防止后来人弯弯绕绕耳！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mafTools的工具的安装及Makefile修复">
 <meta property="og:url" content="http://example.com/2025/06/27/mafTools%E7%9A%84%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8AMakefile%E4%BF%AE%E5%A4%8D/index.html">
 <meta property="og:site_name" content="Celseca&#39;s Diary">
-<meta property="og:description" content="written by : Celseca 众所周知，mafTools是一款很好用的生物信息学工具。 但因其年代久远，版本老旧，语法过时等问题给使用者带来诸多不便。小编通过修改mafTools及其依赖的Makefile,终于成功安装该工具。 以下书写相应教程，按照安装的顺序结构记叙。唯防止后来人弯弯绕绕耳！   需要的目录总览123456789101112131415161718maftools_p">
+<meta property="og:description" content="written by : Celseca 众所周知，mafTools是一款很好用的生物信息学工具。 但因其年代久远，版本老旧，语法过时等问题给使用者带来诸多不便。小编通过修改mafTools及其依赖的Makefile,终于成功安装该工具。 以下书写相应教程，按照安装的顺序结构记叙。唯防止后来人弯弯绕绕耳！">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-27T10:03:31.000Z">
-<meta property="article:modified_time" content="2025-06-27T13:22:27.472Z">
+<meta property="article:modified_time" content="2025-06-27T13:29:22.377Z">
 <meta property="article:author" content="Celseca">
 <meta property="article:tag" content="bioinformatics">
 <meta name="twitter:card" content="summary">
@@ -104,7 +104,7 @@
 <p>众所周知，mafTools是一款很好用的生物信息学工具。</p>
 <p>但因其年代久远，版本老旧，语法过时等问题给使用者带来诸多不便。小编通过修改mafTools及其依赖的Makefile,终于成功安装该工具。</p>
 <p>以下书写相应教程，按照安装的顺序结构记叙。唯防止后来人弯弯绕绕耳！</p>
-<!--read more-->
+<span id="more"></span>
 
 <h2 id="需要的目录总览"><a href="#需要的目录总览" class="headerlink" title="需要的目录总览"></a>需要的目录总览</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">maftools_project/</span><br><span class="line">├── mafTools/</span><br><span class="line">│   ├── bin/</span><br><span class="line">│   │   ├── mafComparator(应用程序)</span><br><span class="line">│   │   ├── mafToFastaStitcher.exe(应用程序)</span><br><span class="line">│   │   └── ... (其他可执行工具)</span><br><span class="line">│   ├── mafToFastaStitcher/</span><br><span class="line">│   │   └── Makefile</span><br><span class="line">│   ├── Makefile</span><br><span class="line">│   └── ... (其他源文件和目录)</span><br><span class="line">│</span><br><span class="line">├── sonLib/</span><br><span class="line">└── pinchesAndCacti/</span><br><span class="line">    ├── externalTools/</span><br><span class="line">    │   └── threeEdgeConnected/</span><br><span class="line">    │       └── Makefile</span><br><span class="line">    ├── Makefile</span><br><span class="line">    └── ... (其他源文件和目录)</span><br></pre></td></tr></table></figure>
 
