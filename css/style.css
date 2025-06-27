@@ -1360,13 +1360,13 @@ body {
 #main,
 #sidebar {
   background: transparent;
-  border: 1px solid transparent;
+  border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 /* 4. 【新增】让文章正文和代码块的背景半透明 */
 .article-entry {
-  background: rgba(255,255,255,0.55) !important;
+  background: rgba(255,255,255,0) !important;
 /* 以下为可选的美化样式 */
   padding: 20px; /* 给内容增加一点内边距，让它不那么贴边 */
   border-radius: 8px; /* 给它一个圆角，更好看 */
