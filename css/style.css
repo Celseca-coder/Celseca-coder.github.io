@@ -1371,3 +1371,9 @@ body {
   padding: 20px; /* 给内容增加一点内边距，让它不那么贴边 */
   border-radius: 8px; /* 给它一个圆角，更好看 */
 }
+.outer {
+  background: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+}
