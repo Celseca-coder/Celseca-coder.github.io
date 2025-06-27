@@ -101,88 +101,15 @@
 <p>众所周知，mafTools是一款很好用的生物信息学工具。</p>
 <p>但因其年代久远，版本老旧，语法过时等问题给使用者带来诸多不便。小编通过修改mafTools及其依赖的Makefile,终于成功安装该工具。</p>
 <p>以下书写相应教程，按照安装的顺序结构记叙。唯防止后来人弯弯绕绕耳！</p>
-<h2 id="需要的目录总览"><a href="#需要的目录总览" class="headerlink" title="需要的目录总览"></a>需要的目录总览</h2><p>好的，经过我们之前一系列的编译和修复工作，对目录结构进行一次梳理和规范化是非常好的习惯。</p>
-<p>您提供的目录有些层级关系不太清晰，并且有一个小的拼写错误 (<code>sunLib</code> 应为 <code>sonLib</code>)。</p>
-<p>下面是一个清晰、规范化的标准目录结构，它反映了 <code>mafTools</code> 及其依赖项在成功编译后的理想状态：</p>
-<h3 id="规范化后的目录结构"><a href="#规范化后的目录结构" class="headerlink" title="规范化后的目录结构"></a>规范化后的目录结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">maftools_project/</span><br><span class="line">├── mafTools/</span><br><span class="line">│   ├── bin/</span><br><span class="line">│   │   ├── mafComparator(应用程序)</span><br><span class="line">│   │   ├── mafToFastaStitcher.exe(应用程序)</span><br><span class="line">│   │   └── ... (其他可执行工具)</span><br><span class="line">│   ├── mafToFastaStitcher/</span><br><span class="line">│   │   └── Makefile</span><br><span class="line">│   ├── Makefile</span><br><span class="line">│   └── ... (其他源文件和目录)</span><br><span class="line">│</span><br><span class="line">├── sonLib/</span><br><span class="line">└── pinchesAndCacti/</span><br><span class="line">    ├── externalTools/</span><br><span class="line">    │   └── threeEdgeConnected/</span><br><span class="line">    │       └── Makefile</span><br><span class="line">    ├── Makefile</span><br><span class="line">    └── ... (其他源文件和目录)</span><br></pre></td></tr></table></figure>
-
-<h2 id="conda环境创建"><a href="#conda环境创建" class="headerlink" title="conda环境创建"></a>conda环境创建</h2><p>别想了，偷不了懒的。该软件要求python2.7，和市面上流行的python版本都不兼容。所以我们必须conda一个环境，并令python&#x3D;2.7同时安装必要的库：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n maftools_env python=2.7</span><br></pre></td></tr></table></figure>
-
-<p>然后安装必要依赖</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate maftools_env</span><br><span class="line">conda install scipy numpy git make</span><br></pre></td></tr></table></figure>
-
-<p>注：因为该软件年代久远，anaconda需要在镜像里找一找。花的时间长一点是正常的。在5min以内应该都不会有什么大问题。</p>
-<h2 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h2><p>根据该软件的readme , 这个软件需要安装以下依赖包：</p>
-<ol>
-<li><strong>sunLib</strong></li>
-<li><strong>pinchesAndCacti</strong></li>
-</ol>
-<p>我们来分步操作</p>
-<h3 id="sunLib"><a href="#sunLib" class="headerlink" title="sunLib"></a>sunLib</h3><ol>
-<li>从github上clone之</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ComparativeGenomicsToolkit/sonLib.git</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>在根目录下make一下即可</li>
-</ol>
-<h3 id="pinchesAndCacti"><a href="#pinchesAndCacti" class="headerlink" title="pinchesAndCacti"></a>pinchesAndCacti</h3><p><strong>本软件年久失修，makefile有几个地方需要修改！</strong></p>
-<p><del>不然会报一长串错哦</del></p>
-<p>(本部分采取从内到外的顺序记叙)</p>
-<h4 id="threeEdgeConnected中makefile的问题"><a href="#threeEdgeConnected中makefile的问题" class="headerlink" title="threeEdgeConnected中makefile的问题"></a>threeEdgeConnected中makefile的问题</h4><p>我们翻到这个文件夹，并找到其中的makefile</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/zoutongjin/miniconda3/envs/maftools_env/pinchesAndCacti/externalTools/threeEdgeConnected</span><br><span class="line">vim Makefile</span><br></pre></td></tr></table></figure>
-
-<p>我们会在这个makefile里看到以下代码：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&#123;cxx&#125; <span class="variable">$(CPPFLAGS)</span> <span class="variable">$(CFLAGS)</span> $&#123;cflags&#125; -I $&#123;libPath&#125;/ -c $&#123;libSources&#125;</span><br><span class="line">//此处省略n行</span><br><span class="line">$&#123;cxx&#125; <span class="variable">$(LDFLAGS)</span> <span class="variable">$(CPPFLAGS)</span> $&#123;cflags&#125; <span class="variable">$(CFLAGS)</span> -I inc -I$&#123;libPath&#125; -o $&#123;binPath&#125;/3EdgeTests $&#123;libTests&#125; $&#123;libPath&#125;/3EdgeConnected.a $&#123;basicLibs&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个 <strong>${cxx}</strong> 通常用于指代编译C++代码，<strong>但这个文件里全是C代码你用这CXX编译个啥啊</strong>！</p>
-<p><del>这时你会说：你一个写代码的电脑上难道不装gcc?</del></p>
-<p><del>但如果我说，很多生信服务器上都没装gcc，阁下该如何应对呢？</del></p>
-<p>所以我们根据C语言makefile的书写规范，把这几个地方依次改为如下书写方式：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(CC)</span> <span class="variable">$(CPPFLAGS)</span> <span class="variable">$(CFLAGS)</span> $&#123;cflags&#125; -I $&#123;libPath&#125;/ -c $&#123;libSources&#125;</span><br><span class="line">//此处省略n行</span><br><span class="line"><span class="variable">$(CC)</span> <span class="variable">$(LDFLAGS)</span> <span class="variable">$(CPPFLAGS)</span> $&#123;cflags&#125; <span class="variable">$(CFLAGS)</span> -I inc -I$&#123;libPath&#125; -o $&#123;binPath&#125;/3EdgeTests $&#123;libTests&#125; $&#123;libPath&#125;/3EdgeConnected.a $&#123;basicLibs&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="主Makefile中的问题"><a href="#主Makefile中的问题" class="headerlink" title="主Makefile中的问题"></a>主Makefile中的问题</h4><p>同样的，出现了{CXX}的问题：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;cxx&#125; <span class="variable">$(CPPFLAGS)</span> <span class="variable">$(CFLAGS)</span> $&#123;cflags&#125; -I impl -I $&#123;libPath&#125;/ -c $&#123;libSources&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们也把{cxx}改为(CC)</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(CC)</span> <span class="variable">$(CPPFLAGS)</span> <span class="variable">$(CFLAGS)</span> $&#123;cflags&#125; -I impl -I $&#123;libPath&#125;/ -c $&#123;libSources&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="软件主体安装"><a href="#软件主体安装" class="headerlink" title="软件主体安装"></a>软件主体安装</h2><p>这里面仅有<strong>mafToFastaStitcher</strong>会出现问题</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">src/mafToFastaStitcherAPI.c:655:22: error: <span class="string">&#x27;%lu&#x27;</span> directive writing between 1 and 19 bytes into a region of size 7 [-Werror=format-overflow=]</span><br><span class="line">     sprintf(fmtName, <span class="string">&quot; %%-%&quot;</span> PRIu64 <span class="string">&quot;s&quot;</span>, maxName + 2);</span><br><span class="line">                      ^~~~~~~</span><br></pre></td></tr></table></figure>
-
-
-
-<p>这时我们需要修改<strong>mafToFastaStitcher</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> mafToFastaStitcher</span><br><span class="line">vim Makefile</span><br></pre></td></tr></table></figure>
-
-<p>我们找到这一行：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span> ../inc/common.mk</span><br></pre></td></tr></table></figure>
-
-<p>在这一行下面加上这行代码：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cflags := <span class="variable">$(<span class="built_in">filter</span>-out -Werror, <span class="variable">$(cflags)</span>)</span></span><br></pre></td></tr></table></figure>
-
-<p><em>(别问为什么是:&#x3D;，Makefile标准)</em></p>
-<p>然后再到主目录里make一下即编译成功</p>
-<h2 id="验证安装并添加到总路径"><a href="#验证安装并添加到总路径" class="headerlink" title="验证安装并添加到总路径"></a>验证安装并添加到总路径</h2><h3 id="验证是否成功编译"><a href="#验证是否成功编译" class="headerlink" title="验证是否成功编译"></a>验证是否成功编译</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/mafStats --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
-
-<p>目标输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mafStats, v0.1 July 2012</span><br><span class="line">build: 2025-06-27T23:51CST, master, 4e5b5de3f275f61b36b9762824cc1edbead31820</span><br><span class="line"></span><br><span class="line">Usage: mafStats --maf [maf file] [options]</span><br><span class="line"></span><br><span class="line">A program to <span class="built_in">read</span> MAF file and report back statistics about the contents.</span><br><span class="line"></span><br><span class="line">Options: </span><br><span class="line">  -h, --<span class="built_in">help</span>             show this <span class="built_in">help</span> message and <span class="built_in">exit</span>.</span><br><span class="line">  -m, --maf              path to the maf file.</span><br><span class="line">  -v, --verbose          turns on verbose output.</span><br></pre></td></tr></table></figure>
-
-<h3 id="添加到主路径"><a href="#添加到主路径" class="headerlink" title="添加到主路径"></a>添加到主路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=$(<span class="built_in">pwd</span>)/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="测试是否添加成功"><a href="#测试是否添加成功" class="headerlink" title="测试是否添加成功"></a>测试是否添加成功</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mafStats --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
-
-<p>目标输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mafStats, v0.1 July 2012</span><br><span class="line">build: 2025-06-27T23:51CST, master, 4e5b5de3f275f61b36b9762824cc1edbead31820</span><br><span class="line"></span><br><span class="line">Usage: mafStats --maf [maf file] [options]</span><br><span class="line"></span><br><span class="line">A program to <span class="built_in">read</span> MAF file and report back statistics about the contents.</span><br><span class="line"></span><br><span class="line">Options: </span><br><span class="line">  -h, --<span class="built_in">help</span>             show this <span class="built_in">help</span> message and <span class="built_in">exit</span>.</span><br><span class="line">  -m, --maf              path to the maf file.</span><br><span class="line">  -v, --verbose          turns on verbose output.</span><br></pre></td></tr></table></figure>
-
-<p><img src="C:\Users\HONOR\AppData\Roaming\Typora\typora-user-images\image-20250627172452256.png" alt="image-20250627172452256"></p>
-<p>(放一个40原老师的可爱猫娘~)</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2025/06/27/mafTools%E7%9A%84%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8AMakefile%E4%BF%AE%E5%A4%8D/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/27/mafTools%E7%9A%84%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8AMakefile%E4%BF%AE%E5%A4%8D/" data-id="cmcenwc7500005opihp2fdxz3" data-title="mafTools的工具的安装及Makefile修复" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/27/mafTools%E7%9A%84%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8AMakefile%E4%BF%AE%E5%A4%8D/" data-id="cmceodp0l0001uopihyee5j66" data-title="mafTools的工具的安装及Makefile修复" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -225,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/11/Celseca-s-Introduction/" data-id="cmcenm4tg00001cpiheathx9e" data-title="Celseca&#39;s Introduction" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/11/Celseca-s-Introduction/" data-id="cmceodp0j0000uopi4h14dbqf" data-title="Celseca&#39;s Introduction" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
