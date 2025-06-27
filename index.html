@@ -101,6 +101,8 @@
 <p>众所周知，mafTools是一款很好用的生物信息学工具。</p>
 <p>但因其年代久远，版本老旧，语法过时等问题给使用者带来诸多不便。小编通过修改mafTools及其依赖的Makefile,终于成功安装该工具。</p>
 <p>以下书写相应教程，按照安装的顺序结构记叙。唯防止后来人弯弯绕绕耳！</p>
+<!--read more-->
+
 <h2 id="需要的目录总览"><a href="#需要的目录总览" class="headerlink" title="需要的目录总览"></a>需要的目录总览</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">maftools_project/</span><br><span class="line">├── mafTools/</span><br><span class="line">│   ├── bin/</span><br><span class="line">│   │   ├── mafComparator(应用程序)</span><br><span class="line">│   │   ├── mafToFastaStitcher.exe(应用程序)</span><br><span class="line">│   │   └── ... (其他可执行工具)</span><br><span class="line">│   ├── mafToFastaStitcher/</span><br><span class="line">│   │   └── Makefile</span><br><span class="line">│   ├── Makefile</span><br><span class="line">│   └── ... (其他源文件和目录)</span><br><span class="line">│</span><br><span class="line">├── sonLib/</span><br><span class="line">└── pinchesAndCacti/</span><br><span class="line">    ├── externalTools/</span><br><span class="line">    │   └── threeEdgeConnected/</span><br><span class="line">    │       └── Makefile</span><br><span class="line">    ├── Makefile</span><br><span class="line">    └── ... (其他源文件和目录)</span><br></pre></td></tr></table></figure>
 
 <h2 id="conda环境创建"><a href="#conda环境创建" class="headerlink" title="conda环境创建"></a>conda环境创建</h2><p>别想了，偷不了懒的。该软件要求python2.7，和市面上流行的python版本都不兼容。所以我们必须conda一个环境，并令python&#x3D;2.7同时安装必要的库：</p>
@@ -179,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/06/27/mafTools%E7%9A%84%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8AMakefile%E4%BF%AE%E5%A4%8D/" data-id="cmcetc3ss0001uopig67whx1h" data-title="mafTools的工具的安装及Makefile修复" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/06/27/mafTools%E7%9A%84%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8AMakefile%E4%BF%AE%E5%A4%8D/" data-id="cmcetvofp00012kpig3zd5g18" data-title="mafTools的工具的安装及Makefile修复" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -222,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/11/Celseca-s-Introduction/" data-id="cmcetc3sp0000uopi8hwkbcxp" data-title="Celseca&#39;s Introduction" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/11/Celseca-s-Introduction/" data-id="cmcetvofn00002kpi9jesdvr6" data-title="Celseca&#39;s Introduction" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

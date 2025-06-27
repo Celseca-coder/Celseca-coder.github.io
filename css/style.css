@@ -1345,7 +1345,7 @@ pre .javascript .function {
   display: inline-block;
 }
 body {
-  background-image: url("/images/background.jpg");
+  background-image: #fff url("/images/background.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1369,7 +1369,6 @@ body {
 }
 /* 4. 【新增】让文章正文和代码块的背景半透明 */
 .article-entry {
-/* 这里我们使用深色半透明背景，与您的主题风格保持一致 */
   background: rgba(255,255,255,0.85) !important;
 /* 以下为可选的美化样式 */
   padding: 20px; /* 给内容增加一点内边距，让它不那么贴边 */
